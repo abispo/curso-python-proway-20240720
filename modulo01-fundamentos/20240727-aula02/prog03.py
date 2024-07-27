@@ -11,6 +11,7 @@ iterável = estrutura em que é possível acessar os itens de maneira sequencial
 """
 
 from random import randint
+from time import sleep
 
 if __name__ == "__main__":
 
@@ -44,7 +45,7 @@ if __name__ == "__main__":
     while batalha_ocorrendo:
         
         print(f"{heroi['nome']} ataca {monstro['nome']}.")
-        dado = randint(1, 10)
+        dado = randint(1, 12)
 
         ataque_heroi = heroi['att'] + dado
         if ataque_heroi > monstro['def']:
@@ -58,6 +59,7 @@ if __name__ == "__main__":
             batalha_ocorrendo = False
             continue
 
+        sleep(1)
         # =================================
 
         print(f"{monstro['nome']} ataca {heroi['nome']}.")
@@ -74,3 +76,10 @@ if __name__ == "__main__":
             vencedor = monstro
             batalha_ocorrendo = False
             continue
+
+        print(heroi)
+        print(monstro)
+
+        sleep(1)
+
+    print(f"Vencedor: {vencedor}")
