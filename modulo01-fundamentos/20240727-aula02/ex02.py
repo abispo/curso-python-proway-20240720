@@ -15,6 +15,7 @@ if __name__ == "__main__":
 
         lista_numeros.append(numero)
 
+    # Utilizando list-comprehension
     lista_quadrados = [numero * numero for numero in lista_numeros]
 
     print(f"Lista dos quadrados: {lista_quadrados}")
