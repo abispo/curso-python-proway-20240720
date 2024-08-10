@@ -30,3 +30,27 @@ if __name__ == "__main__":
 
         # O método writerows recebe uma lista de listas. Cada item dessa lista de listas será salvo como uma linha, e os itens dessa linha serão separados pelo delimitador
         arquivo_csv.writerows(lista_itens)
+
+# ---------------------------
+
+    caminho_arquivo = os.path.join(os.getcwd(), "arquivos", "funcionarios.csv")
+
+    with open(caminho_arquivo, "w", encoding="utf-8", newline="") as arquivo:
+
+        lista_funcionarios = [
+            {"nome": "Ugo", "setor": 3},
+            {"nome": "Samantha", "setor": 1},
+            {"nome": "Rogério", "setor": 3},
+        ]
+
+        # Aqui usamos o parâmetro fieldnames, que indica os nomes das colunas do arquivo
+        arquivo_csv = csv.DictWriter(arquivo, delimiter=';', fieldnames=["nome", "setor"])
+
+        # Aqui salvamos os nomes das colunas
+        arquivo_csv.writeheader()
+
+        # Aqui salvamos os dados no arquivo
+        arquivo_csv.writerow({"nome": "Ivan", "setor": 2})
+
+        # Aqui salvamos os dados no arquivo que estão na lista
+        arquivo_csv.writerows(lista_funcionarios)
