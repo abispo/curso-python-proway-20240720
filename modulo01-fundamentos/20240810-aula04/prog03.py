@@ -21,3 +21,15 @@ if __name__ == "__main__":
 
         for linha in arquivo_csv:
             print(linha)
+
+
+    with open(caminho_arquivo, "r", encoding="utf-8") as arquivo:
+
+        # Abaixo utilizamos a classe DictReader. Diferentemente do reader, essa classe retorna uma lista de dicionários, onde as chaves dos dicionários são as colunas do arquivo csv, e os valores, os seus valores
+        arquivo_csv = csv.DictReader(arquivo, delimiter=';')
+
+        for linha in arquivo_csv:
+            print(f"Nome: {linha.get('nome')}")
+            print(f"Idade: {linha.get('idade')}")
+            print(f"Valor: {linha.get('valor').replace('.', ',')}")
+            print('-'*50)
