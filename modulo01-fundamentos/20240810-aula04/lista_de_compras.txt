@@ -1,32 +1,5 @@
-Arroz
-Feijão
-Alface
-Tomate
-Cebolinha
-Frango
-Vinho do Porto
-Rapadura
-Arroz
-Feijão
-Alface
-Tomate
-Cebolinha
-Frango
-Vinho do Porto
-Rapadura
-Arroz
-Feijão
-Alface
-Tomate
-Cebolinha
-Frango
-Vinho do Porto
-Rapadura
-Arroz
-Feijão
-Alface
-Tomate
-Cebolinha
-Frango
-Vinho do Porto
-Rapadura
+Laranja
+Maçã
+Abacaxi
+Damasco
+Uva
