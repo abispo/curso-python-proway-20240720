@@ -59,3 +59,9 @@ Maria;4;9;10;2;5
 ```
 
 Nesse caso, a média da aluna Maria será calculada utilizando as 3 notas intermediárias, ou seja, [4, 5, 9]. A menor nota (2) e maior nota (10) são excluídas do cálculo, ou seja, a média de Maria será de 6.
+
+Após salvar, mostrar esses dados na tela. Exemplo:
+
+Quantidade de Alunos:
+Média Geral:
+Aluno com a Maior Média: <nome> com a média de <média>
