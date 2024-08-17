@@ -74,5 +74,20 @@ CREATE TABLE tb_estados(
     # fetchall() - Retorna todos os registros da consulta
     print(result.fetchall())
 
+    comando = "DELETE FROM tb_estados WHERE sigla IN ('SP', 'RJ', 'RS');"
+    cursor.execute(comando)
+    connection.commit()
+
+    dados = [
+        ("São Paulo", "SP",),
+        ("Rio de Janeiro", "RJ",),
+        ("Rio Grande do Sul", "RS",)
+    ]
+
+    comando = "INSERT INTO tb_estados(nome, sigla) VALUES (?, ?);"
+    cursor.executemany(comando, dados)
+    connection.commit()
+
     # 6. Fechamos a conexão com o banco de dados
+    cursor.close()
     connection.close()
