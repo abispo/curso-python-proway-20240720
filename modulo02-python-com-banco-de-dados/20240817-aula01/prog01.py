@@ -57,7 +57,22 @@ CREATE TABLE tb_estados(
         )
         cursor.execute(comando)
     
+    # Quando executamos comandos DML (INSERT, UPDATE, DELETE), precisamos aplicar(confirmar) essas alterações na tabela. Para isso, precisamos chamar o método commit() do objeto conexão
     connection.commit()
+
+    comando = "SELECT * FROM tb_estados;"
+    result = cursor.execute(comando)
+
+    # Para trazer registros de uma tabela, podemos utilizar até 3 métodos:
+    
+    # fetchone() - Retorna o primeiro registro da consulta
+    print(result.fetchone())
+
+    # fetchmany(quantidade) - Retorna uma quantidade específica de registros
+    print(result.fetchmany(10))
+
+    # fetchall() - Retorna todos os registros da consulta
+    print(result.fetchall())
 
     # 6. Fechamos a conexão com o banco de dados
     connection.close()
