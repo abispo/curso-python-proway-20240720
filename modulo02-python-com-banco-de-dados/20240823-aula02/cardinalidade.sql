@@ -76,6 +76,49 @@ INSERT INTO tb_postagens (perfil_id, titulo, texto, data_hora) VALUES
 (2, "Devops: Uma Introdução", "Devops é infraestrutura como código.", "2024-08-11 19:15:02");
 SELECT * FROM tb_postagens ;
 
-SELECT a.id, b.perfil_id, a.nome, b.titulo, b.texto FROM tb_perfis a
-LEFT JOIN tb_postagens b
-ON a.id = b.perfil_id;
+--
+
+CREATE TABLE IF NOT EXISTS tb_categorias(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nome VARCHAR(100) NOT NULL
+);
+DESC tb_categorias ;
+INSERT INTO tb_categorias (nome) VALUES
+	("TI"),
+	("Programação"),
+	("Python"),
+	("Java"),
+	("Linux");
+SELECT * FROM tb_categorias ;
+
+-- Como temos uma relação de N:N entre as tabelas tb_postagens e tb_categorias, precisamos
+-- criar uma tabela que fará a ligação entre esses registros, chamada de tabela associativa.
+
+CREATE TABLE IF NOT EXISTS tb_postagens_categorias(
+	postagem_id INT NOT NULL,
+	categoria_id INT NOT NULL,
+	PRIMARY KEY(postagem_id, categoria_id),
+	FOREIGN KEY(postagem_id) REFERENCES tb_postagens(id),
+	FOREIGN KEY(categoria_id) REFERENCES tb_categorias(id)
+);
+DESC tb_postagens_categorias;
+-- Associando as categorias "TI", "Programação" e "Python", a postagem de título "A Linguagem Python"
+INSERT INTO tb_postagens_categorias (postagem_id, categoria_id) VALUES
+	(1, 1),
+	(1, 2),
+	(1, 3);
+SELECT * FROM tb_postagens_categorias ;
+
+-- tb_postagens a
+-- tb_postagens_categorias b
+-- tb_categorias c
+
+SELECT a.id, a.titulo, c.nome FROM tb_postagens a
+INNER JOIN tb_postagens_categorias b
+ON a.id = b.postagem_id
+INNER JOIN tb_categorias c
+ON b.categoria_id = c.id
+WHERE a.id = 1;
+
+-- Com o comando acima, conseguimos saber quais categorias estão associadas
+-- a postagem "A Linguagem Python"
