@@ -18,8 +18,8 @@ Iremos implementar algumas funcionalidades da batalha de RPG, que nós fizemos p
 
 3. classe `Rodada`. Essa classe irá representar uma rodada da batalha. Em cada rodada, o herói ataca primeiro, e o monstro defende. Após isso, o herói defende e o monstro ataca. Com isso finalizamos a rodada. Essa classe terá as seguintes características:
     * atributos
-        * heroi
-        * monstro
+        * _heroi
+        * _monstro
 
     * métodos
         * iniciar
