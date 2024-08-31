@@ -49,6 +49,9 @@ class Pokemon:
     def evoluir(self):
         print(f"{self._nome} evoluiu!")
 
+def mostrar(objeto: Pokemon):
+    print(objeto.get_nome())
+
 if __name__ == "__main__":
     
     # Aqui estamos instanciando a classe Pokemon. Essa classe já está sendo inicializada com os atributos nome, tipo e hp
@@ -108,3 +111,5 @@ print("Celular instanciado")
 print("Ligado" if samsung.esta_ligado() else "Desligado")
 samsung.ligar()
 print("Ligado" if samsung.esta_ligado() else "Desligado")
+
+mostrar(pikachu)
