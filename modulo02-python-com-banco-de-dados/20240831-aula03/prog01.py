@@ -4,6 +4,11 @@ Programação Orientada a Objetos em Python
 Classes, Métodos, Atributos e Objetos
 """
 
+# PascalCase    -> FuncionarioTerceirizado
+# camelCase     -> gerarReceita()
+# snake_case    -> gerar_relatorio()
+# UPPER_CASE    -> BIT = 1
+
 class Pokemon:
     def __init__(self, nome: str, tipo: str, hp: int) -> None:
         self._nome = nome
@@ -37,4 +42,10 @@ class Pokemon:
         print(f"{self._nome} evoluiu!")
 
 if __name__ == "__main__":
-    pass
+    
+    # Aqui estamos instanciando a classe Pokemon. Essa classe já está sendo inicializada com os atributos nome, tipo e hp
+    pikachu = Pokemon(
+        nome="Pikachu",
+        tipo="Elétrico",
+        hp=60
+    )
