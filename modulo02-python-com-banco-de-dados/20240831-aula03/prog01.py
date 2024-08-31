@@ -58,6 +58,7 @@ if __name__ == "__main__":
         hp=60
     )
 
+    # Estamos instanciando a classe Pokemon, gerando um novo objeto. Podemos criar infinitos objetos a partir de uma classe, o limite será a quantidade de memória do computador.
     charmander = Pokemon(
         nome="Charmander",
         tipo="Fogo",
@@ -68,6 +69,8 @@ if __name__ == "__main__":
 
     [pikachu, charmander]
 
+    # Abaixo estamos chamando os métodos desse objeto criado a partir da classe Pokemon. O método set_tipo altera o valor do atributo _tipo do objeto. Ou seja, é a partir do atributo self que o valor é alterado.
+    # Nesse caso, o tipo do pokemon está sendo alterado de Elétrico para Aquático
     print(pikachu.get_tipo())
     pikachu.set_tipo("Aquático")
     print(pikachu.get_tipo())
