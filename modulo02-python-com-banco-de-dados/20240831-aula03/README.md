@@ -24,4 +24,4 @@ Iremos implementar algumas funcionalidades da batalha de RPG, que nós fizemos p
     * métodos
         * iniciar
 
-4. Crie a classe Batalha, que irá representar a batalha em si. Essa batalha deverá ocorrer enquanto nenhum dos personagens morrer. Você definirá quais os atributos e os métodos dessa classe que melhor se funcionarão para replicarmos o comportamento do código da aula anterior.
+4. Crie a classe `Batalha`, que irá representar a batalha em si. Essa batalha deverá ocorrer enquanto nenhum dos personagens morrer. Você definirá quais os atributos e os métodos dessa classe que melhor se funcionarão para replicarmos o comportamento do código da aula anterior.
