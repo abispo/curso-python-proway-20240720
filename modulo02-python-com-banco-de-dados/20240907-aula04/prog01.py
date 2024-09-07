@@ -57,9 +57,17 @@ ESCOLHA UMA OPÇÃO:
 
             case 1:
                 saldo = conta_bancaria_viacredi.saldo
-                print(f"Seu saldo é de {saldo:.2f}.")
+                print(f"O saldo da conta '{conta_bancaria_viacredi.nome}' é de {saldo:.2f}.")
 
             case 2:
                 valor = float(input("Informe o valor a ser depositado: "))
                 conta_bancaria_viacredi.depositar(valor=valor)
                 print(f"{valor} reais foram depositados na sua conta.")
+
+            case 3:
+                valor = float(input("Informe o valor a ser sacado: "))
+                conta_bancaria_viacredi.sacar(valor=valor)
+                print(f"{valor} reais foram sacados da sua conta.")
+
+            case _:
+                print("Você informou uma opção desconhecida.")
