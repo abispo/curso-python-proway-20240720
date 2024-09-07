@@ -49,3 +49,17 @@ ESCOLHA UMA OPÇÃO:
     while True:
         print(texto)
         opcao = int(input("Informe a opção: "))
+
+        match opcao:
+            case 0:
+                print("Saindo...")
+                break
+
+            case 1:
+                saldo = conta_bancaria_viacredi.saldo
+                print(f"Seu saldo é de {saldo:.2f}.")
+
+            case 2:
+                valor = float(input("Informe o valor a ser depositado: "))
+                conta_bancaria_viacredi.depositar(valor=valor)
+                print(f"{valor} reais foram depositados na sua conta.")
