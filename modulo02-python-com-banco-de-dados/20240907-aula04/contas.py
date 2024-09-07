@@ -3,7 +3,7 @@ from excecoes import ValorDeDepositoInvalido, ValorDeSaqueInvalido
 
 class ContaFinanceira:
 
-    def __init__(self, nome: float, saldo: float=0) -> None:
+    def __init__(self, nome: str, saldo: float=0) -> None:
         self._nome = nome
         self._saldo = saldo
 
@@ -36,7 +36,7 @@ class ContaCorrente(ContaFinanceira):
 
 
 class ContaInvestimento(ContaFinanceira):
-    def __init__(self, nome: float, taxa: float, saldo: float = 0) -> None:
+    def __init__(self, nome: str, taxa: float, saldo: float = 0) -> None:
         self._taxa = taxa
         super().__init__(nome, saldo)
 
