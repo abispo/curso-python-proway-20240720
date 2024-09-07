@@ -55,7 +55,6 @@ if __name__ == "__main__":
     baralho = Baralho()
     print(baralho)
 
-    # for carta in baralho:
-    #     print(carta)
-
-
+    # Desafio: Fazer o objeto da classe Baralho ser iterável.
+    # Dica: Procure os métodos mágicos __iter__ e __next__
+    # Dica2: Pode utilizar o chat gpt. Mas assegure-se de que entende o que está acontecendo
