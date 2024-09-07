@@ -29,3 +29,16 @@ class ContaFinanceira:
         if valor <= 0:
             raise ValorDeDepositoInvalido(valor)
         self._saldo = self._saldo + valor
+
+
+class ContaCorrente(ContaFinanceira):
+    pass
+
+
+class ContaInvestimento(ContaFinanceira):
+    def __init__(self, nome: float, taxa: float, saldo: float = 0) -> None:
+        self._taxa = taxa
+        super().__init__(nome, saldo)
+
+    def render(self):
+        self._saldo = self._saldo + (self._saldo * (self._taxa / 100))
