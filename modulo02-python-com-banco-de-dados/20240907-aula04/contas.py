@@ -1,3 +1,5 @@
+from excecoes import ValorDeDepositoInvalido, ValorDeSaqueInvalido
+
 
 class ContaFinanceira:
 
@@ -18,7 +20,12 @@ class ContaFinanceira:
         return self._saldo
     
     def sacar(self, valor: float) -> float:
-        pass
+        if valor > self._saldo:
+            raise ValorDeSaqueInvalido(valor, self._saldo)
+        self._saldo = self._saldo - valor
+        return valor
 
     def depositar(self, valor: float) -> None:
-        pass
+        if valor <= 0:
+            raise ValorDeDepositoInvalido(valor)
+        self._saldo = self._saldo + valor
