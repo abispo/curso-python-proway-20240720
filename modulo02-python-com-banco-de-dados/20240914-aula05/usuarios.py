@@ -16,7 +16,3 @@ def gerenciar_usuarios():
 
 def listar_usuarios():
     return session.query(Usuario).all()
-
-
-if __name__ == "__main__":
-    pass
