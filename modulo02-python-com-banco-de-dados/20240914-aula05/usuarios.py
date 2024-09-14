@@ -21,7 +21,7 @@ def gerenciar_usuarios():
                     print("Não existem usuários cadastrados.")
 
                 for usuario in usuarios:
-                    print(usuario)
+                    pass
 
             case 2:
                 email = input("Informe o e-mail do novo usuário: ")

@@ -17,3 +17,10 @@ Selecione uma das opções abaixo
 3 - ATUALIZAR USUÁRIO
 4 - APAGAR USUÁRIO
 """
+
+MENSAGEM_LISTA_USUARIO = """
+Nome: {nome}
+Sobrenome: {sobrenome}
+Email: {email}
+Data de Nascimento: {data_de_nascimento}
+"""
