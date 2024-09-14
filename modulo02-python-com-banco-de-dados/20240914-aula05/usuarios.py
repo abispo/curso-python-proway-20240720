@@ -1,6 +1,6 @@
 
 from config import session
-from mensagens import MENU_USUARIOS
+from mensagens import MENU_USUARIOS, MENSAGEM_LISTA_USUARIO
 from models import Usuario, Perfil
 
 def gerenciar_usuarios():
@@ -21,7 +21,13 @@ def gerenciar_usuarios():
                     print("Não existem usuários cadastrados.")
 
                 for usuario in usuarios:
-                    pass
+                    print(MENSAGEM_LISTA_USUARIO.format(
+                        nome=usuario.perfil.nome,
+                        sobrenome=usuario.perfil.sobrenome,
+                        email=usuario.email,
+                        data_de_nascimento=usuario.perfil.data_de_nascimento
+                    ))
+                    print('*'*50)
 
             case 2:
                 email = input("Informe o e-mail do novo usuário: ")
