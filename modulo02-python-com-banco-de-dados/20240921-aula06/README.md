@@ -2,39 +2,16 @@
 
 SQLAlchemy é um ORM (Object Relational Mapper | Mapeador Objeto Relacional). Basicamente utilizamos para trabalhar com banco de dados utilizando orientação a objetos.
 
-## Instalação
-De preferência, quando utilizamos pacotes de terceiros, criamos um virtualenv em python para instalação dos pacotes.
+## Alembic
+Alembic é uma ferramente de migração de banco de dados utilizada geralmente junto com o SQLAlchemy. Uma ferramenta de migração permite que tenhamos um histórico de alterações no nosso banco de dados, além de permitir uma rápida configuração das nossas tabelas via código (`code-first`).
 
-### Virtualenvs em Python
-As virtualenvs (ambientes virtuais) em Python são ferramentas que permitem criar e gerenciar ambientes Python isolados do sistema global. Essa separação é especialmente útil quando você está desenvolvendo diferentes projetos que podem ter dependências diferentes, versões de bibliotecas ou até mesmo versões diferentes do Python. Abaixo, estão alguns pontos-chave sobre as virtualenvs:
+### Instalação e configuração do alembic
+`(NÃO ESQUEÇA DE CRIAR UM VIRTUALENV PARA O SEU PROJETO)`
+Para instalarmos o alembic, rodamos o comando `pip install alembic`. Depois de instalado, geramos os arquivos de configuração com o comando `alembic init alembic`. Esse comando irá criar na raiz do projeto o arquivo `alembic.ini`, e uma pasta chamada `alembic`, com outras configurações, inclusive o script de carregamento.
 
-* Isolamento de Ambientes:
-    * Uma virtualenv cria um diretório isolado que contém sua própria instalação do Python e suas próprias bibliotecas. Isso evita conflitos entre diferentes projetos que podem depender de versões diferentes de bibliotecas.
+Após uma configuração inicial, geralmente seguimos esse passo-a-passo para se trabalhar com a ferramenta:
 
-* Instalação de Dependências:
-    * Dentro de um ambiente virtual, você pode instalar e gerenciar as dependências específicas do seu projeto usando o pip, sem afetar o Python global ou outros ambientes virtuais.
-
-* Facilidade de Criação e Ativação:
-    * Criar uma virtualenv é simples usando o módulo `venv` (ou `virtualenv`, um pacote externo). Uma vez criado, você ativa o ambiente virtual para começar a usá-lo. A ativação configura a linha de comando para usar o Python e o pip específicos do ambiente virtual.
-
-* Requisitos do Projeto:
-    * Muitos projetos Python incluem um arquivo chamado requirements.txt, que lista todas as dependências do projeto. Isso facilita a replicação do ambiente em outro local ou por outros desenvolvedores.
-
-* Ambientes para Desenvolvimento e Produção:
-    * Muitas equipes de desenvolvimento usam ambientes virtuais para garantir que o ambiente de desenvolvimento seja consistente com o ambiente de produção. Isso ajuda a evitar surpresas devido a diferenças nas versões das bibliotecas.
-
-* Integração com Ferramentas de Desenvolvimento:
-    * Muitas ferramentas de desenvolvimento e ambientes de integração contínua têm suporte para ambientes virtuais. Isso facilita a configuração de projetos em diferentes etapas do ciclo de vida do desenvolvimento.
-
-* Portabilidade:
-    * Como os ambientes virtuais são isolados, você pode compartilhá-los com outros desenvolvedores ou implantá-los em diferentes sistemas operacionais, mantendo a consistência das dependências do projeto.
-
-* Desenvolvimento Experimental:
-    * Ambientes virtuais são frequentemente usados para testar bibliotecas ou versões de Python antes de comprometê-las com o ambiente global ou do projeto.
-
-* Documentação de Ambientes:
-    * Ao incluir um requirements.txt em seu projeto, você fornece uma forma documentada de reproduzir o ambiente de desenvolvimento.
-
-Ao usar virtualenvs, os desenvolvedores podem criar ambientes Python isolados, facilitando a gestão de dependências e garantindo uma reprodução consistente do ambiente de desenvolvimento em diferentes contextos.
-
-`pip install sqlalchemy`
+1. Fazer as alterações que precisamos nas models
+2. Rodar o comando `alembic revision --autogenerate -m "<mensagem>"` para gerar o arquivo de migration, que por padrão será salvo na pasta `alembic/versions`
+3. Fazemos uma rápida revisão dos comandos que foram gerados nesse arquivo.
+4. Aplicamos a migração no banco de dados com o comando `alembic revision head`, sendo o `head` um apelido para a última revision gerada.
