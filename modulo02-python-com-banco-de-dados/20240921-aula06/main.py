@@ -1,11 +1,8 @@
 
-from config import Base, connection
 from mensagens import MENU_GERAL
-from models import Usuario, Perfil
 from usuarios import gerenciar_usuarios
 
 if __name__ == "__main__":
-    Base.metadata.create_all(connection)
 
     while True:
         print(MENU_GERAL)
