@@ -1,6 +1,7 @@
 # módulo das models
 
-from sqlalchemy import Column, Date, ForeignKey, Integer, String
+from sqlalchemy import func
+from sqlalchemy import Column, Date, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from config import Base
 
@@ -11,6 +12,9 @@ class Usuario(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     email = Column(String(100), nullable=False)
     senha = Column(String(100), nullable=False)
+    criado_em = Column(DateTime, server_default=func.now())
+    atualizado_em = Column(DateTime, onupdate=func.now())
+
 
     # Caso as tabelas que estão mapeadas estejam relacionadas, podemos criar uma relação no nível de objetos. Ou seja, o atributo 'perfil' irá conter o objeto usuário do registro relacionado na tabela.
     # O parâmetro back_populates indica qual será o atributo de ligação na outra classe
