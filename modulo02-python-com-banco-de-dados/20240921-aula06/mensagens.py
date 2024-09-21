@@ -24,3 +24,13 @@ Sobrenome: {sobrenome}
 Email: {email}
 Data de Nascimento: {data_de_nascimento}
 """
+
+MENU_POKEMONS = """
+Selecione uma das opções abaixo
+
+0 - SAIR
+1 - LISTAR POKÉMONS
+2 - ADICIONAR POKÉMON
+3 - APAGAR POKÉMON
+===============================
+"""
