@@ -50,6 +50,13 @@ class Postagem(Base):
     autor = relationship("Perfil", back_populates="postagens", uselist=False)
 
 
+class Categoria(Base):
+
+    __tablename__ = "tb_categorias"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nome = Column(String(100), nullable=False)
+
 """
 Desafio: Criar a model Postagem, que será mapeada para a tabela tb_postagens. Os atributos e relacionamentos dessa model devem ser os mesmos que foram definidos na aula sobre cardinalidade (aula 2 | https://github.com/abispo/curso-python-proway-20240720/blob/main/modulo02-python-com-banco-de-dados/20240823-aula02/cardinalidade.sql)
 
