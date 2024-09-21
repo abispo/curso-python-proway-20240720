@@ -1,7 +1,7 @@
 # módulo das models
 
 from sqlalchemy import func
-from sqlalchemy import Column, Date, DateTime, ForeignKey, Integer, String
+from sqlalchemy import Column, Date, DateTime, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import relationship
 from config import Base
 
@@ -32,12 +32,28 @@ class Perfil(Base):
     genero = Column(String(20), nullable=True)
     data_de_nascimento = Column(Date, nullable=True)
 
+    # Por padrão, o valor do parâmetro 'uselist' é igual a 'True'
+    postagens = relationship("Postagem", back_populates="autor")
     usuario = relationship("Usuario", back_populates="perfil", uselist=False)
+
+
+class Postagem(Base):
+
+    __tablename__ = "tb_postagens"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    perfil_id = Column(Integer, ForeignKey("tb_perfis.id"), nullable=False)
+    titulo = Column(String(200), nullable=False)
+    texto = Column(Text, nullable=False)
+    data_hora = Column(DateTime, server_default=func.now())
+
+    autor = relationship("Perfil", back_populates="postagens", uselist=False)
+
 
 """
 Desafio: Criar a model Postagem, que será mapeada para a tabela tb_postagens. Os atributos e relacionamentos dessa model devem ser os mesmos que foram definidos na aula sobre cardinalidade (aula 2 | https://github.com/abispo/curso-python-proway-20240720/blob/main/modulo02-python-com-banco-de-dados/20240823-aula02/cardinalidade.sql)
 
-Além dos relacionamentos, você deve criar os atributos do tipo relationship, de maneira semelhante como foi feito entre Usuario e Perfil. Ou seja, você vai criar a estrutura de um relacionamento 1:N, entre Perfil e Postagem. O objeto 'perfil' deve ter um atributo de nome 'postagens', que irá retornar a lista de posts feitos por determinado perfil, e o objeto 'postagem' terá um atributo chamado 'autor' que será o objeto perfil relacionado.
+Além dos relacionamentos, você deve criar os atributos do tipo relationship, de maneira semelhante como foi feito entre Usuario e Perfil. Ou seja, você vai criar a estrutura de um relacionamento 1:N, entre Perfil e Postagem. O objeto 'Perfil' deve ter um atributo de nome 'postagens', que irá retornar a lista de posts feitos por determinado perfil, e o objeto 'Postagem' terá um atributo chamado 'autor' que será o objeto perfil relacionado.
 
 Desafio Bonus: Crie o relacionamento N:N entre Postagem e Categoria.
 """
