@@ -6,6 +6,12 @@ class Pergunta(models.Model):
     data_publicacao = models.DateTimeField("Data de publicação")
 
     # Dentro de uma model, podemos alterar as configurações padrão dela declarando a classe Meta. No exemplo abaixo, alteramos o nome padrão que o Django daria para a tabela para tb_perguntas
+
+    def __str__(self) -> str:
+        return "({}) {}".format(
+            self.id, self.texto
+        )
+
     class Meta:
         db_table = "tb_perguntas"
 
