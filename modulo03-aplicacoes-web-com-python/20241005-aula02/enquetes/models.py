@@ -1,5 +1,7 @@
-from django.db import models
+import datetime
 
+from django.db import models
+from django.utils import timezone
 
 class Pergunta(models.Model):
     texto = models.CharField(max_length=200)
@@ -11,6 +13,9 @@ class Pergunta(models.Model):
         return "({}) {}".format(
             self.id, self.texto
         )
+    
+    def publicado_recentemente(self) -> bool:
+        return self.data_publicacao >= timezone.now() - datetime.timedelta(days=1) # 04/10/2024
 
     class Meta:
         db_table = "tb_perguntas"
@@ -20,6 +25,11 @@ class Opcao(models.Model):
     pergunta = models.ForeignKey(Pergunta, on_delete=models.CASCADE)
     texto = models.CharField(max_length=200)
     votos = models.IntegerField(default=0)
+
+    def __str__(self) -> str:
+        return "{} ({})".format(
+            self.texto, self.pergunta.texto
+        )
 
     class Meta:
         db_table = "tb_opcoes"
