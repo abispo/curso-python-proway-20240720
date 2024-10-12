@@ -29,7 +29,13 @@ def detalhes(request, pergunta_id):
     )
 
 def resultados(request, pergunta_id):
-    return HttpResponse(f"Você está na página de resultados da pergunta {pergunta_id}.")
+    pergunta = get_object_or_404(Pergunta, pk=pergunta_id)
+
+    return render(
+        request,
+        "enquetes/resultados.html",
+        {"pergunta": pergunta}
+    )
 
 def votar(request, pergunta_id):
     pergunta = get_object_or_404(Pergunta, pk=pergunta_id)
