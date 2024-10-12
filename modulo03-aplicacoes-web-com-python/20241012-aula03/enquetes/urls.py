@@ -9,7 +9,7 @@ Como o django sabe que deve executar uma determinada view de acordo com a URL qu
 
 """
 
-
+app_name = "enquetes"
 
 urlpatterns = [
     path("", views.index, name="index"),

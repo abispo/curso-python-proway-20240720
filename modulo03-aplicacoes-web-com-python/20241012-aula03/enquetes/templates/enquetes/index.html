@@ -1,7 +1,7 @@
 {% if lista_perguntas %}
 <ul>
     {% for pergunta in lista_perguntas %}
-        <li><a href="/enquetes/{{ pergunta.id }}/">{{ pergunta.texto }}</a></li>
+        <li><a href="{% url 'enquetes:detalhes' pergunta.id %}">{{ pergunta.texto }}</a></li>
     {% endfor %}
 </ul>
 

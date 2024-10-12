@@ -1,6 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.utils import timezone
+from django.shortcuts import render, get_object_or_404
 
 from .models import Pergunta
 
@@ -20,7 +19,7 @@ def index(request):
     return render(request, "enquetes/index.html", context)
 
 def detalhes(request, pergunta_id):
-    pergunta = Pergunta.objects.get(pk=pergunta_id)
+    pergunta = get_object_or_404(Pergunta, pk=pergunta_id)
 
     return render(
         request,
