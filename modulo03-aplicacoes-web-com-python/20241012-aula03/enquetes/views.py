@@ -1,7 +1,8 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 
-from .models import Pergunta
+from .models import Pergunta, Opcao
 
 # HTTP -> HyperText Transfer Protocol
 
@@ -31,4 +32,25 @@ def resultados(request, pergunta_id):
     return HttpResponse(f"Você está na página de resultados da pergunta {pergunta_id}.")
 
 def votar(request, pergunta_id):
-    return HttpResponse(f"Você está votando na pergunta {pergunta_id}.")
+    pergunta = get_object_or_404(Pergunta, pk=pergunta_id)
+
+    try:
+        opcao_selecionada = pergunta.opcao_set.get(pk=request.POST["opcao"])
+
+    except (KeyError, Opcao.DoesNotExist):
+        return render(
+            request,
+            "enquetes/detalhes.html",
+            context={
+                "pergunta": pergunta,
+                "mensagem_erro": "Você não selecionou uma opção válida."
+            }
+        )
+
+    else:
+        opcao_selecionada.votos += 1
+        opcao_selecionada.save()
+
+        return HttpResponseRedirect(
+            reverse("enquetes:resultados", args=(pergunta.id,))
+        )
