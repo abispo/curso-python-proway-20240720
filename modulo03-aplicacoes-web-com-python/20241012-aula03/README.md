@@ -16,7 +16,7 @@ Caso você coloque o ponto (`.`) no final do comando, o django irá criar a estr
 
 * Criar novas migrations
 
-`python manage.py makemigrations [nome_do_pacote]`
+`python manage.py makemigrations [nome_do_app]`
 
 * Criar um superadmin no projeto
 
