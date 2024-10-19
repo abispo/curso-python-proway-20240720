@@ -1,0 +1,16 @@
+<form action="{% url 'enquetes:votar' pergunta.id %}" method="post">
+
+    {% comment %} Quando criamos um formulário utilizando o método POST, obrigatoriamente precisamos informar a tag abaixo {% endcomment %}
+    {% csrf_token %}
+
+    <fieldset>
+        <legend><h1>{{ pergunta.texto }}</h1></legend>
+        {% if mensagem_erro %}<p><strong>{{ mensagem_erro }}</strong></p>{% endif %}
+
+        {% for opcao in pergunta.opcao_set.all %}
+            <input type="radio" name="opcao" id="opcao{{ forloop.counter }}" value="{{ opcao.id }}">
+            <label for="opcao{{ forloop.counter }}">{{ opcao.texto }}</label><br />
+        {% endfor %}
+    </fieldset>
+    <input type="submit" value="Votar">
+</form>
