@@ -33,3 +33,4 @@ class Opcao(models.Model):
 
     class Meta:
         db_table = "tb_opcoes"
+        verbose_name_plural = "opções"
