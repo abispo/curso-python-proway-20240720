@@ -1,3 +1,4 @@
+import json
 import os
 
 from django.core.management.base import BaseCommand
@@ -32,7 +33,9 @@ class Command(BaseCommand):
                 caminho_arquivo = os.path.join(downloads_dir, "enquetes.json")
 
                 with open(caminho_arquivo, 'w', encoding="utf-8") as arquivo:
-                    arquivo.write(resposta.json())
+                    arquivo.write(
+                        json.dumps(resposta.json())
+                    )
 
         except Exception as exc_info:
             self.stderr.write(f"Erro ao baixar arquivo: {exc_info}")
