@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 
+{% load static %}
+{% block meus_estilos %}
+
+    <link rel="stylesheet" href="{% static 'enquetes/styles.css' %}">
+
+{% endblock meus_estilos %}
+
 {% block conteudo %}
+    <h1 id="titulo-perguntas">Lista de Perguntas</h1>
+    <hr>
+
     {% if lista_perguntas %}
     <ul>
         {% for pergunta in lista_perguntas %}
