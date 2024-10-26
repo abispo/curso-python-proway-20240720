@@ -1,18 +1,22 @@
-<h1>Estatísticas</h1>
-<hr>
+{% extends "base.html" %}
 
-<ul>
-    <li>Quantidade de perguntas cadastradas: {{ quantidade_de_perguntas_cadastradas }}</li>
-    <li>Quantidade de opções cadastradas: {{ quantidade_de_opcoes_cadastradas }}</li>
-    <li>Média de opções por pergunta: {{ media_de_opcoes_por_pergunta }}</li>
-</ul>
+{% block conteudo %}
+    <h1>Estatísticas</h1>
+    <hr>
 
-<h3>5 primeiras perguntas com mais votos:</h3>
-<ul>
-    {% for pergunta in lista_de_perguntas_ordenada_pela_quantidade_de_votos %}
-        <li><strong>{{ pergunta.texto}}</strong> {{ pergunta.num_votos}} voto{{ pergunta.num_votos | pluralize }}.</li>
-    {% endfor %}
-</ul>
+    <ul>
+        <li>Quantidade de perguntas cadastradas: {{ quantidade_de_perguntas_cadastradas }}</li>
+        <li>Quantidade de opções cadastradas: {{ quantidade_de_opcoes_cadastradas }}</li>
+        <li>Média de opções por pergunta: {{ media_de_opcoes_por_pergunta }}</li>
+    </ul>
 
-<hr>
-<a href="{% url "enquetes:index" %}">Ir para a página principal de enquetes</a>
+    <h3>5 primeiras perguntas com mais votos:</h3>
+    <ul>
+        {% for pergunta in lista_de_perguntas_ordenada_pela_quantidade_de_votos %}
+            <li><strong>{{ pergunta.texto}}</strong> {{ pergunta.num_votos}} voto{{ pergunta.num_votos | pluralize }}.</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+    <a href="{% url "enquetes:index" %}">Ir para a página principal de enquetes</a>
+{% endblock conteudo %}
