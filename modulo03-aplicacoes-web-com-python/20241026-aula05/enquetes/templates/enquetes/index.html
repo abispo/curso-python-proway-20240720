@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+    {% if lista_perguntas %}
+    <ul>
+        {% for pergunta in lista_perguntas %}
+            <li><a href="{% url 'enquetes:detalhes' pergunta.id %}">{{ pergunta.texto }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+    <a href="{% url "estatisticas:index" %}">Ir para as estatísticas do site</a>
+
+    {% else %}
+        <p>Não há perguntas cadastradas.</p>
+    {% endif %}
+{% endblock conteudo %}
