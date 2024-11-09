@@ -29,5 +29,9 @@ def pre_registro(request):
             pre_registro.save()
 
             return redirect(reverse(
-                "login"
+                "registro:envio_email_pre_registro"
             ))
+
+
+def envio_email_pre_registro(request):
+    return render(request, "registro/envio_email_pre_registro.html")
