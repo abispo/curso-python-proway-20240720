@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 
 from . import forms
+from .models import PreRegistro
 
 def pre_registro(request):
 
@@ -20,4 +22,12 @@ def pre_registro(request):
 
         # Verifica se o formulário enviado é válido:
         if form.is_valid():
-            pass
+            
+            email = form.cleaned_data["email"]
+
+            pre_registro = PreRegistro(email=email)
+            pre_registro.save()
+
+            return redirect(reverse(
+                "login"
+            ))
