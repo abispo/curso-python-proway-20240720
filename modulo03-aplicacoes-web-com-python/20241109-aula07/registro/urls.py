@@ -5,6 +5,7 @@ from . import views
 app_name = "registro"
 
 urlpatterns = [
+    path("", views.registro, name="registro"),
     path("pre-registro/", views.pre_registro, name="pre_registro"),
     path(
         "envio-email-pre-registro/",

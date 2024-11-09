@@ -1,8 +1,10 @@
+from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from . import forms
 from .models import PreRegistro
+from .utils import enviar_email
 
 def pre_registro(request):
 
@@ -28,6 +30,8 @@ def pre_registro(request):
             pre_registro = PreRegistro(email=email)
             pre_registro.save()
 
+            enviar_email(request, pre_registro)
+
             return redirect(reverse(
                 "registro:envio_email_pre_registro"
             ))
@@ -35,3 +39,17 @@ def pre_registro(request):
 
 def envio_email_pre_registro(request):
     return render(request, "registro/envio_email_pre_registro.html")
+
+
+def registro(request: HttpRequest):
+    token = request.GET.get("id")
+
+    pre_registro_valido = PreRegistro.objects.filter(
+        token=token, valido=True
+    ).first()
+
+    return render(
+        request,
+        "registro/registro.html",
+        {"pre_registro": pre_registro_valido}
+    )
