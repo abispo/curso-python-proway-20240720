@@ -77,3 +77,9 @@ def registro(request: HttpRequest):
         Perfil.objects.create(
             usuario=usuario
         )
+
+def confirmacao_cadastro(request: HttpRequest):
+    return render(
+        request,
+        "registro/confirmacao_cadastro.html"
+    )
