@@ -1,5 +1,26 @@
 {% extends "base.html" %}
 
 {% block conteudo %}
-    {{ pre_registro.token }}
+
+    <div class="row my-2">
+        <div class="col text-center">
+            <h3>Confirmação de cadastro</h3>
+        </div>
+    </div>
+    <hr>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="row justify-content-center">
+            <div class="col-3">
+                <div class="form-floating">
+                    <input type="text" name="nome" id="nome" class="form-control" placeholder="nome" required>
+                    <label for="nome">Nome</label>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
 {% endblock conteudo %}

@@ -1,5 +1,6 @@
 from uuid import uuid4
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class PreRegistro(models.Model):
@@ -10,3 +11,24 @@ class PreRegistro(models.Model):
 
     class Meta:
         db_table = "tb_pre_registro"
+
+
+class Perfil(models.Model):
+    usuario = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=True
+    )
+    documento = models.CharField(max_length=20)
+    genero = models.CharField(max_length=30, null=True, blank=True)
+    data_de_nascimento = models.DateField(null=True, blank=True)
+
+    def __str__(self) -> str:
+        return "{} {} ({})".format(
+            self.usuario.first_name,
+            self.usuario.last_name,
+            self.usuario.email
+        )
+    
+    class Meta:
+        db_table = "tb_perfis"
