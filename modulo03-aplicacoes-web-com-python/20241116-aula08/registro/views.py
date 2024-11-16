@@ -42,14 +42,16 @@ def envio_email_pre_registro(request):
 
 
 def registro(request: HttpRequest):
-    token = request.GET.get("id")
 
-    pre_registro_valido = PreRegistro.objects.filter(
-        token=token, valido=True
-    ).first()
+    if request.method == "GET":
+        token = request.GET.get("id")
 
-    return render(
-        request,
-        "registro/registro.html",
-        {"pre_registro": pre_registro_valido}
-    )
+        pre_registro_valido = PreRegistro.objects.filter(
+            token=token, valido=True
+        ).first()
+
+        return render(
+            request,
+            "registro/registro.html",
+            {"pre_registro": pre_registro_valido}
+        )
