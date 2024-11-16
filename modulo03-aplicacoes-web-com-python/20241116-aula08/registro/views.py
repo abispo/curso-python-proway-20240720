@@ -28,6 +28,11 @@ def pre_registro(request):
             
             email = form.cleaned_data["email"]
 
+            # Valida se já não existe um pré-registro válido para esse e-mail
+            email_valido_existe_no_pre_registro = PreRegistro.objects.filter(
+                email=email, valido=True
+            )
+
             pre_registro = PreRegistro(email=email)
             pre_registro.save()
 
