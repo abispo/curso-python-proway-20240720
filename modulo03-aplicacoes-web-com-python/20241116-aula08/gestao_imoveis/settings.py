@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'debug_toolbar',    
 
     'registro.apps.RegistroConfig',
+    'gestao.apps.GestaoConfig',
 ]
 
 MIDDLEWARE = [

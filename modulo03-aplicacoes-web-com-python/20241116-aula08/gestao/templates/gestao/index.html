@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+{% if user.is_authenticated %}
+    <p>Você está logado como <strong>{{ user.username }}</strong>.</p>
+    <form action="{% url "logout" %}" method="POST">
+        <button type="submit" class="btn btn-primary">Logout</button>
+    </form>
+{% else %}
+    <p>Você não está logado. <a href="{% url "login" %}">Clique aqui</a> para ir a página de login</p>
+{% endif %}
+
+{% endblock conteudo %}

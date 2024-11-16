@@ -78,6 +78,8 @@ def registro(request: HttpRequest):
             usuario=usuario
         )
 
+        return redirect(reverse("registro:confirmacao_cadastro"))
+
 def confirmacao_cadastro(request: HttpRequest):
     return render(
         request,

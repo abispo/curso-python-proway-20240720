@@ -22,5 +22,6 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('contas/', include("django.contrib.auth.urls")),
-    path('registro/', include("registro.urls"))
+    path('registro/', include("registro.urls")),
+    path('gestao/', include('gestao.urls'))
 ] + debug_toolbar_urls()
