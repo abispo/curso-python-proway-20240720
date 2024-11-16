@@ -19,7 +19,7 @@ class Perfil(models.Model):
         on_delete=models.CASCADE,
         primary_key=True
     )
-    documento = models.CharField(max_length=20)
+    documento = models.CharField(max_length=20, null=True, blank=True)
     genero = models.CharField(max_length=30, null=True, blank=True)
     data_de_nascimento = models.DateField(null=True, blank=True)
 
