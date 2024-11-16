@@ -33,6 +33,22 @@ def pre_registro(request):
                 email=email, valido=True
             )
 
+            # Valida se já não existe um cadastro com esse e-mail
+            email_ja_cadastrado = User.objects.filter(
+                email=email
+            )
+
+            if email_valido_existe_no_pre_registro or email_ja_cadastrado:
+                form.add_error(
+                    "email", "O e-mail informado não é válido. Verifique se já possui cadastro no sistema ou se ainda não confirmou um pré-registro anterior."
+                )
+
+                return render(
+                    request,
+                    "registro/pre_registro.html",
+                    {"form": form}
+                )
+
             pre_registro = PreRegistro(email=email)
             pre_registro.save()
 
