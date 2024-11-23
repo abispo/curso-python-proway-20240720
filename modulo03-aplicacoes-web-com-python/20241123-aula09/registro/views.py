@@ -1,9 +1,11 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from . import forms
+from .exceptions import PreRegistroInvalido
 from .models import PreRegistro, Perfil
 from .utils import enviar_email
 
@@ -66,17 +68,25 @@ def envio_email_pre_registro(request):
 def registro(request: HttpRequest):
 
     if request.method == "GET":
-        token = request.GET.get("id")
+        try:
 
-        pre_registro_valido = PreRegistro.objects.filter(
-            token=token, valido=True
-        ).first()
+            token = request.GET.get("id")
 
-        return render(
-            request,
-            "registro/registro.html",
-            {"pre_registro": pre_registro_valido}
-        )
+            pre_registro_valido = PreRegistro.objects.filter(
+                token=token, valido=True
+            ).first()
+
+            if not pre_registro_valido:
+                raise PreRegistroInvalido()
+
+            return render(
+                request,
+                "registro/registro.html",
+                {"pre_registro": pre_registro_valido}
+            )
+        
+        except ValidationError:
+            return redirect(reverse("registro:pre_registro_invalido"))
     
     elif request.method == "POST":
 
@@ -99,10 +109,20 @@ def registro(request: HttpRequest):
             usuario=usuario
         )
 
+        pre_registro = PreRegistro.objects.filter(email=email).first()
+        pre_registro.valido = False
+        pre_registro.save()
+
         return redirect(reverse("registro:confirmacao_cadastro"))
 
 def confirmacao_cadastro(request: HttpRequest):
     return render(
         request,
         "registro/confirmacao_cadastro.html"
+    )
+
+def pre_registro_invalido(request):
+    return render(
+        request,
+        "registro/pre_registro_invalido.html"
     )

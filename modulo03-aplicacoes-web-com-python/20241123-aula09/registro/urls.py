@@ -12,5 +12,6 @@ urlpatterns = [
         views.envio_email_pre_registro,
         name="envio_email_pre_registro"
     ),
-    path("confirmacao-cadastro/", views.confirmacao_cadastro, name="confirmacao_cadastro")
+    path("confirmacao-cadastro/", views.confirmacao_cadastro, name="confirmacao_cadastro"),
+    path("pre-registro-invalido/", views.pre_registro_invalido, name="pre_registro_invalido")
 ]
