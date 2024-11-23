@@ -111,6 +111,17 @@ def registro(request: HttpRequest):
         senha = request.POST.get("senha")
         confirmacao_de_senha = request.POST.get("confirmacao_de_senha")
 
+        """
+        Implementar as seguintes validações:
+            1. Validar se todos os dados recebidos foram preenchidos
+            2. Validar se o nome de usuário informado já não existe na tabela de usuários
+            3. Validar se o valor de senha é igual ao valor de confirmacao_de_senha
+
+        Implemente essas validações como funções. Essas funções devem ser criadas no arquivo validators.py, que se encontra no pacote registro. Elas devem ser importadas nesse módulo e chamadas antes da criação do usuário
+        """
+
+        # Chame os validadores antes do método create_user
+
         usuario = User.objects.create_user(
             first_name=nome,
             last_name=sobrenome,
