@@ -1,11 +1,13 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.utils import timezone
 
 from . import forms
-from .exceptions import PreRegistroInvalido
+from .exceptions import PreRegistroInvalido, PreRegistroExpirado
 from .models import PreRegistro, Perfil
 from .utils import enviar_email
 
@@ -77,7 +79,19 @@ def registro(request: HttpRequest):
             ).first()
 
             if not pre_registro_valido:
+                rota_redirecionar = "registro:pre_registro_invalido"
                 raise PreRegistroInvalido()
+            
+            pre_registro_expirado = (
+                timezone.now() - pre_registro_valido.criado_em
+            ).total_seconds() > settings.TEMPO_LIMITE_CONFIRMACAO_PRE_REGISTRO
+
+            if pre_registro_expirado:
+                pre_registro_valido.valido = False
+                pre_registro_valido.save()
+                rota_redirecionar = "registro:pre_registro_expirado"
+
+                raise PreRegistroExpirado()
 
             return render(
                 request,
@@ -86,7 +100,7 @@ def registro(request: HttpRequest):
             )
         
         except ValidationError:
-            return redirect(reverse("registro:pre_registro_invalido"))
+            return redirect(reverse(rota_redirecionar))
     
     elif request.method == "POST":
 
@@ -125,4 +139,10 @@ def pre_registro_invalido(request):
     return render(
         request,
         "registro/pre_registro_invalido.html"
+    )
+
+def pre_registro_expirado(request):
+    return render(
+        request,
+        "registro/pre_registro_expirado.html"
     )
