@@ -10,7 +10,7 @@ from . import forms
 from .exceptions import PreRegistroInvalido, PreRegistroExpirado
 from .models import PreRegistro, Perfil
 from .utils import enviar_email
-from .validators import todos_dados_foram_preenchidos, nome_de_usuario_ja_existe
+from .validators import todos_dados_foram_preenchidos, nome_de_usuario_ja_existe, senhas_iguais
 
 def pre_registro(request):
 
@@ -137,6 +137,10 @@ def registro(request: HttpRequest):
 
         if username_ja_existe:
             erros.append(f"O nome de usuário '{nome_de_usuario}' já existe no cadastro. Escolha outro")
+
+
+        if not senhas_iguais(senha, confirmacao_de_senha):
+            erros.append("As senhas não conferem.")
 
         if erros:
             return render(
