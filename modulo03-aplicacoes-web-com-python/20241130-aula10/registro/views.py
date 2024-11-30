@@ -10,6 +10,7 @@ from . import forms
 from .exceptions import PreRegistroInvalido, PreRegistroExpirado
 from .models import PreRegistro, Perfil
 from .utils import enviar_email
+from .validators import todos_dados_foram_preenchidos, nome_de_usuario_ja_existe
 
 def pre_registro(request):
 
@@ -120,7 +121,32 @@ def registro(request: HttpRequest):
         Implemente essas validações como funções. Essas funções devem ser criadas no arquivo validators.py, que se encontra no pacote registro. Elas devem ser importadas nesse módulo e chamadas antes da criação do usuário
         """
 
-        # Chame os validadores antes do método create_user
+        pre_registro = PreRegistro.objects.filter(email=email).first()
+        erros = []
+
+        dados_preenchidos = todos_dados_foram_preenchidos(
+            nome, sobrenome, nome_de_usuario, email, senha, confirmacao_de_senha
+        )
+
+        if not dados_preenchidos:
+            erros.append("Você deve preencher todos os dados do formulário.")
+
+        username_ja_existe = nome_de_usuario_ja_existe(
+            nome_de_usuario
+        )
+
+        if username_ja_existe:
+            erros.append(f"O nome de usuário '{nome_de_usuario}' já existe no cadastro. Escolha outro")
+
+        if erros:
+            return render(
+                request,
+                "registro/registro.html",
+                {
+                    "pre_registro": pre_registro,
+                    "erros": erros
+                }
+            )
 
         usuario = User.objects.create_user(
             first_name=nome,
@@ -134,7 +160,6 @@ def registro(request: HttpRequest):
             usuario=usuario
         )
 
-        pre_registro = PreRegistro.objects.filter(email=email).first()
         pre_registro.valido = False
         pre_registro.save()
 
